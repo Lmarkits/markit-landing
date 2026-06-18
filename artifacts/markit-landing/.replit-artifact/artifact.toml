@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "MARKIT — Animated Landing"
+version = "1.0.0"
+id = "artifacts/markit-landing"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24938
+
+[services.development]
+run = "pnpm --filter @workspace/markit-landing run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/markit-landing", "run", "build" ]
+publicDir = "artifacts/markit-landing/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24938"
+BASE_PATH = "/"
